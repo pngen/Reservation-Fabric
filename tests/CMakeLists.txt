@@ -7,6 +7,7 @@ endif()
 
 set(RF_TESTS
   test_interval
+  test_serialization
   test_lifecycle
   test_accounting
   test_bundle

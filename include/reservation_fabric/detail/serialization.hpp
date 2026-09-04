@@ -73,7 +73,10 @@ class ByteReader {
     std::uint32_t n = u32();
     if (n > kMaxString) throw_error(ErrorCode::CorruptData, "string length exceeds bound");
     require(n);
-    std::string s(reinterpret_cast<const char*>(&data_[pos_]), n);
+    // Avoid &data_[pos_] when n==0 and pos_==size(): vector::operator[] at size()
+    // is a Debug-only bounds assert (and UB in any config).
+    std::string s;
+    if (n > 0) s.assign(reinterpret_cast<const char*>(&data_[pos_]), n);
     pos_ += n;
     return s;
   }
