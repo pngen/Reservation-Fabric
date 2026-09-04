@@ -1,0 +1,8 @@
+if(MSVC)
+  set(RF_WARN_COMMON /W4 /WX)
+else()
+  set(RF_WARN_COMMON -Wall -Wextra -Werror)
+endif()
+add_executable(bench_basic bench_basic.cpp)
+target_link_libraries(bench_basic PRIVATE ReservationFabric::ReservationFabric)
+target_compile_options(bench_basic PRIVATE ${RF_WARN_COMMON})

@@ -1,0 +1,8 @@
+if(MSVC)
+  set(RF_WARN_COMMON /W4 /WX)
+else()
+  set(RF_WARN_COMMON -Wall -Wextra -Werror)
+endif()
+add_executable(rfcli rfcli.cpp)
+target_link_libraries(rfcli PRIVATE ReservationFabric::ReservationFabric)
+target_compile_options(rfcli PRIVATE ${RF_WARN_COMMON})
